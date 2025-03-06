@@ -1,13 +1,11 @@
 from fastapi import FastAPI
-from crawl4ai import WebCrawler
+import crawl4ai
 
 app = FastAPI()
-crawler = WebCrawler()
 
 @app.get("/crawl")
 async def crawl(url: str):
-    crawler.warmup()
-    result = crawler.run(url)
+    result = crawl4ai.crawl(url)
     return result.markdown
 
 @app.get("/")
